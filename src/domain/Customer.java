@@ -11,7 +11,7 @@ public class Customer {
         this.total = 1000.0;
     }
 
-    public Customer(int ID, Boolean isNew, double total) {
+    public Customer(int ID, Boolean isNew, double total) throws Exception {
         setID(ID);
         setNew(isNew);
         setTotal(total);
@@ -21,11 +21,11 @@ public class Customer {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(int ID) throws Exception {
         if(ID > 0){
             this.ID = ID;
         }else{
-            this.ID = 0;
+            throw new Exception("ID повинен бути більше нуля");
         }
     }
 
@@ -45,10 +45,10 @@ public class Customer {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(double total) throws Exception{
 
         if(total < 0){
-            this.total = 0;
+            throw new Exception("Сума повинна бути більше нуля");
         }else{
             this.total = total;
         }
