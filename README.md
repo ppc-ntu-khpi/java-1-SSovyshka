@@ -21,22 +21,118 @@
 
 ## Перевірка працездатності створеного класу
 
-1. Створити в **пакеті ````test````** клас ````CustomerTest````, в методі ````main```` якого створити об'єкт класу ```` Сustomer ```` та вивести на екран його властивості з допомогою методу ````displayCustomerInfo```` (див. відеозапис лекції). 
-2. **запустіть** його (<kbd>F6</kbd> у NetBeans для запуску головного виконуваного файлу, <kbd>SHIFT</kbd>+<kbd>F6</kbd> - для запуску поточного файлу)
-3. зробіть та збережіть (тека **Solution**) у файл ````done.png```` **скріншот** результатів роботи програми 
+1. Створив пакет test і зробив клас CustomerTest, в методі main створив об'єкт класу Сustomer та вивів на екран.
+2. Програмний код і результат запуска коду.
+``` java
+package src.test;
 
-**На завершення виконання лабораторної роботи закомітьте ваш проект до репозиторію та здайте завдання через Google Classroom, вказавши посилання на Ваш репозиторій.**
+import src.domain.Customer;
 
-:triangular_flag_on_post: **УВАГА!** Ваша оцінка залежить від того, що саме було вами зроблено:
-* на "**три**" - просто виконані перелічені вище завдання
-* на "**чотири**" - те, що на "три", плюс, добре оформлений файл змініть файл ````README.md````  - з кодом класу ```` Сustomer ```` та скріншотом роботи програми
-* на "**п'ять**" - те, що на "чотири", плюс, змінити код класу наступним чином:
-  * додати **конструктор за замовчуванням**, який ініціалізує атрибути початковими значеннями (див. відеозапис лекції) 
-  * додати **методи для зміни атрибутів** - ````setID````, ````setStatus````, ````setTotal```` з відповідними параметрами та перевіркою присвоюваних значень (можуть або нічого не повертати, або повертати булевське значення, див. відеозапис лекції). 
-**Підказка:** натисніть в Netbeans <kbd>Alt</kbd> + <kbd>Insert</kbd> і оберіть пункт "Getter and Setter..." - Netbeans напише все замість вас!
-![](https://github.com/ppc-ntu-khpi/Class-Starter/raw/main/images/GetterAndSetter.png)
-  * **використати ці методи** в методі в методі ````main```` класу````CustomerTest````
-  * зробити та зберегти (тека **Solution**) у файл ````advanced.png```` **скріншот** результатів роботи програми, та модифікувати файл ````README.md````відповідним чином
+public class CustomerTest {
+   public static void main (String[] args) throws Exception {
+    Customer customer = new Customer();
+    customer.displayCustomerInfo();
+   }
+}
+```
 
+![img_1.png](img_1.png)
 
 
+
+
+## Виконання завдання на 5 балів
+
+**Програмний код і результат запуска коду.**
+
+``` java 
+package src.test;
+
+import src.domain.Customer;
+
+public class CustomerTest {
+    public static void main (String[] args) throws Exception {
+        Customer customer = new Customer();
+        customer.displayCustomerInfo();
+
+        Customer customer3 = new Customer(20, false, 1200);
+        customer3.setNew(true);
+        customer3.setTotal(1300);
+        customer3.displayCustomerInfo();
+
+        Customer customer2 = new Customer(0, null, -10);
+        customer2.displayCustomerInfo();
+    }
+}
+
+```
+
+  ``` java 
+package src.domain;
+
+public class Customer {
+    private int ID;
+    private Boolean isNew;
+    private double total;
+
+    public Customer() {
+        this.ID = 1;
+        this.isNew = true;
+        this.total = 1000.0;
+    }
+
+    public Customer(int ID, Boolean isNew, double total) throws Exception {
+        setID(ID);
+        setNew(isNew);
+        setTotal(total);
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) throws Exception {
+        if(ID > 0){
+            this.ID = ID;
+        }else{
+            throw new Exception("ID повинен бути більше нуля");
+        }
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        if (aNew != null){
+            isNew = aNew;
+        }else{
+            isNew = true;
+        }
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) throws Exception{
+
+        if(total < 0){
+            throw new Exception("Сума повинна бути більше нуля");
+        }else{
+            this.total = total;
+        }
+    }
+
+    public void displayCustomerInfo(){
+        System.out.println("Клієнт(Customer) {" + "\n" +
+                "   Номер клієнта : " + ID + "\n" +
+                "   Статус клієнта : " + (isNew ? "новий" : "старий") + "\n" +
+                "   Загальна сума замовлень(рік) : " + total + "\n" +
+                "}");
+    }
+
+}  
+  ```
+
+![img_2.png](img_2.png)
